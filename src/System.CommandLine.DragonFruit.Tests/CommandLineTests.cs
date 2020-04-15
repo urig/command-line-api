@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Rendering;
@@ -202,5 +202,19 @@ namespace System.CommandLine.DragonFruit.Tests
                 .Contain("This threw an error");
             _terminal.ForegroundColor.Should().Be(ConsoleColor.Red);
         }
+
+        [Fact]
+        public async Task It_executes_method_with_two_strings()
+        {
+            int exitCode = await CommandLine.InvokeMethodAsync(
+                new[] { "--first", "Bruce" },
+                TestProgram.TestMainWithTwoStringsMethodInfo,
+                null,
+                _testProgram,
+                _terminal);
+            exitCode.Should().Be(0);
+            _terminal.Out.ToString().Should().Be("Bruce ");
+        }
+
     }
 }

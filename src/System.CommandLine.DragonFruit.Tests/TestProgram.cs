@@ -11,6 +11,8 @@ namespace System.CommandLine.DragonFruit.Tests
 
         public static readonly MethodInfo TestMainMethodInfoWithDefault = typeof(TestProgram).GetMethod(nameof(TestMainWithDefault));
 
+        public static readonly MethodInfo TestMainWithTwoStringsMethodInfo = typeof(TestProgram).GetMethod(nameof(TestMainWithTwoStrings));
+
         /// <summary>
         /// Help for the test program
         /// </summary>
@@ -29,6 +31,11 @@ namespace System.CommandLine.DragonFruit.Tests
         public void TestMainWithDefault(string name = "Bruce", IConsole console = null)
         {
             console?.Out.Write(name);
+        }
+
+        public void TestMainWithTwoStrings(string first, string last, IConsole console)
+        {
+            console?.Out.Write($"{first} {last}");
         }
     }
 }
